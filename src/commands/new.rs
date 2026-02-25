@@ -1,14 +1,20 @@
+use crate::boards;
 use std::fs;
 use std::path::Path;
-use crate::boards;
 
 pub fn run(board_name: &str, name: &str) {
     let board = boards::get(board_name).unwrap_or_else(|| {
-        eprintln!("Board '{}' non supportée. Lance 'rvkit boards' pour voir les boards disponibles.", board_name);
+        eprintln!(
+            "Board '{}' non supportée. Lance 'rvkit boards' pour voir les boards disponibles.",
+            board_name
+        );
         std::process::exit(1);
     });
 
-    println!("Création du projet '{}' pour la board '{}'...", name, board.name);
+    println!(
+        "Création du projet '{}' pour la board '{}'...",
+        name, board.name
+    );
 
     let root = Path::new(name);
     if root.exists() {
@@ -23,7 +29,8 @@ pub fn run(board_name: &str, name: &str) {
     fs::write(
         root.join("linker").join(format!("{}.ld", board.name)),
         board.linker_script,
-    ).expect("Impossible d'écrire le linker script");
+    )
+    .expect("Impossible d'écrire le linker script");
 
     // Génère rvkit.toml
     let toml = format!(
@@ -54,9 +61,12 @@ pub fn build(b: *std.Build) void {{
 
     const exe = b.addExecutable(.{{
         .name = "{}",
-        .root_source_file = b.path("src/main.zig"),
-        .target = target,
-        .optimize = .ReleaseSmall,
+        .root_module = b.createModule(.{{
+            
+            .root_source_file = b.path("src/main.zig"),
+            .target = target,
+            .optimize = .ReleaseSmall,
+        }}),
     }});
 
     b.installArtifact(exe);

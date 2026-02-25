@@ -1,5 +1,5 @@
-mod commands;
 mod boards;
+mod commands;
 
 use clap::{Parser, Subcommand};
 
@@ -34,9 +34,10 @@ fn main() {
 
     match cli.command {
         Commands::New { board, name } => commands::new::run(&board, &name),
-        Commands::Build => println!("Build..."),
+        // Commands::Build => println!("Build..."),
         Commands::Flash => println!("Flash..."),
         Commands::Monitor => println!("Monitor..."),
-        Commands::Boards => println!("Boards disponibles..."),
+        Commands::Boards => commands::boards::run(),
+        Commands::Build => commands::build::run(),
     }
 }

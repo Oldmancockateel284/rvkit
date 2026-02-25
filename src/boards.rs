@@ -26,3 +26,8 @@ pub fn get(name: &str) -> Option<&'static Board> {
         _ => None,
     }
 }
+
+
+pub fn list() -> &'static [&'static Board] {
+    &[&CH32V003, &ESP32_C3]
+}
