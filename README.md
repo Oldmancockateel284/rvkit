@@ -81,6 +81,13 @@ Rename the file to `rvkit.exe`, move it to a folder of your choice (e.g. `C:\Too
 
 ### From source (for Rust developers)
 
+**Linux only**: install build dependencies first:
+
+```bash
+sudo apt install libudev-dev pkg-config  # Debian/Ubuntu
+sudo dnf install systemd-devel pkg-config # Fedora
+```
+
 ```bash
 git clone https://github.com/karagure/rvkit.git
 cd rvkit
