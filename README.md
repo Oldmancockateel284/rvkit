@@ -1,6 +1,6 @@
 # rvkit
 
-![CI](https://github.com/karagure/rvkit/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/karagure/rvkit/actions/workflows/ci.yml/badge.svg)](https://github.com/karagure/rvkit/actions/workflows/ci.yml)
 
 > **Bare metal Zig, without the bare metal pain.**
 
