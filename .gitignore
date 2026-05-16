@@ -1,1 +1,13 @@
-/target
+# Rust
+/target/
+Cargo.lock
+
+# Zig
+.zig-cache/
+zig-out/
+zig-cache/
+
+# Editor
+.idea/
+*.swp
+.vscode/
