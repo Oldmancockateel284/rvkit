@@ -11,3 +11,4 @@ zig-cache/
 .idea/
 *.swp
 .vscode/
+.claude/

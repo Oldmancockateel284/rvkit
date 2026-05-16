@@ -4,6 +4,8 @@
 
 > **Bare metal Zig, without the bare metal pain.**
 
+![rvkit demo](docs/demo.gif)
+
 rvkit is a CLI/TUI toolchain for Zig developers targeting RISC-V microcontrollers.  
 No more manual linker scripts, no more fighting your toolchain — just code, build, flash, monitor.
 
