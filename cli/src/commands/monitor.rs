@@ -7,10 +7,7 @@ pub fn run(port: &str, baud: u32) {
     );
 
     let serial = serialport::new(port, baud).open().unwrap_or_else(|e| {
-        eprintln!(
-            "Error: could not open connection: {} - {}",
-            port, e
-        );
+        eprintln!("Error: could not open connection: {} - {}", port, e);
         std::process::exit(1);
     });
 
