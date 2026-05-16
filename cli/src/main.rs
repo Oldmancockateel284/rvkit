@@ -13,24 +13,24 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Génère un nouveau projet pour une board cible
+    /// Generate a new project for a target board
     New {
         #[arg(long, short)]
         board: String,
         name: String,
     },
-    /// Compile le projet
+    /// Build the project
     Build,
-    /// Flashe le firmware sur la board
+    /// Flash the firmware onto the board
     Flash,
-    /// Moniteur série
+    /// Serial monitor
     Monitor {
         #[arg(long, short, default_value = "/dev/ttyUSB0")]
         port: String,
         #[arg(long, short, default_value = "115200")]
         baud: u32,
     },
-    /// Liste les boards supportées
+    /// List supported boards
     Boards,
 }
 

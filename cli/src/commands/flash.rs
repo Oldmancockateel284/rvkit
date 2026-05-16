@@ -16,23 +16,23 @@ struct ProjectConfig {
 
 pub fn run() {
     let toml_content = fs::read_to_string("rvkit.toml").unwrap_or_else(|_| {
-        eprintln!("Erreur : rvkit.toml introuvable. Es-tu dans un projet rvkit ?");
+        eprintln!("Error: rvkit.toml not found. Are you inside an rvkit project?");
         std::process::exit(1);
     });
 
     let config: Config = toml::from_str(&toml_content).unwrap_or_else(|_| {
-        eprintln!("Erreur : rvkit.toml invalide.");
+        eprintln!("Error: rvkit.toml is invalid.");
         std::process::exit(1);
     });
 
     let board = crate::boards::get(&config.project.board).unwrap_or_else(|| {
-        eprintln!("Board '{}' non supportée.", config.project.board);
+        eprintln!("Board '{}' is not supported.", config.project.board);
         std::process::exit(1);
     });
 
     let binary = format!("zig-out/bin/{}", config.project.name);
 
-    println!("Flash de '{}' sur la board '{}'...", binary, board.name);
+    println!("Flashing '{}' onto board '{}'...", binary, board.name);
 
     let status = match board.flash_tool {
         "wlink" => Command::new("wlink").args(["flash", &binary]).status(),
@@ -40,19 +40,19 @@ pub fn run() {
             .args(["write_flash", "0x0", &binary])
             .status(),
         _ => {
-            eprintln!("Outil de flash '{}' non supporté.", board.flash_tool);
+            eprintln!("Flash tool '{}' is not supported.", board.flash_tool);
             std::process::exit(1);
         }
     };
 
     match status {
-        Ok(s) if s.success() => println!("✓ Flash réussi !"),
+        Ok(s) if s.success() => println!("✓ Flash succeeded!"),
         Ok(_) => {
-            eprintln!("✗ Flash échoué.");
+            eprintln!("✗ Flash failed.");
             std::process::exit(1);
         }
         Err(_) => {
-            eprintln!("Erreur : '{}' introuvable.", board.flash_tool);
+            eprintln!("Error: '{}' not found.", board.flash_tool);
             std::process::exit(1);
         }
     }

@@ -1,19 +1,19 @@
 use std::process::Command;
 
 pub fn run() {
-    println!("Compilation en cours...");
+    println!("Building...");
 
     let status = Command::new("zig")
         .arg("build")
         .status()
         .unwrap_or_else(|_| {
-            eprintln!("Erreur : 'zig' introuvable. Installe zig et reessaie.");
+            eprintln!("Error: 'zig' not found. Install zig and try again.");
             std::process::exit(1);
         });
     if status.success() {
-        println!("Build reussi !");
+        println!("Build succeeded!");
     } else {
-        eprintln!("Build echoue");
+        eprintln!("Build failed.");
         std::process::exit(1);
     }
 }
