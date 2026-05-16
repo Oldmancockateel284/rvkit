@@ -11,10 +11,7 @@ pub fn run(board_name: &str, name: &str) {
         std::process::exit(1);
     });
 
-    println!(
-        "Creating project '{}' for board '{}'...",
-        name, board.name
-    );
+    println!("Creating project '{}' for board '{}'...", name, board.name);
 
     let root = Path::new(name);
     if root.exists() {
@@ -39,10 +36,16 @@ pub fn run(board_name: &str, name: &str) {
 
     let main_zig = r#"const std = @import("std");
 
-pub fn main() void {
+    export fn _start() callconv(.c) noreturn {
+        main();
+        while (true) {}
+    }
+
+    pub fn main() void {
     // Your bare metal code here
-}
-"#;
+    }
+    "#;
+
     fs::write(root.join("src/main.zig"), main_zig).expect("Failed to write main.zig");
 
     let build_zig = format!(

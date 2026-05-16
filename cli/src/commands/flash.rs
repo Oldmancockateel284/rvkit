@@ -1,5 +1,4 @@
 use serde::Deserialize;
-use serialport::available_ports;
 use std::fs;
 use std::process::Command;
 
