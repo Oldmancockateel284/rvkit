@@ -5,6 +5,7 @@ use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
 #[command(name = "rvkit")]
+#[command(version)]
 #[command(about = "Bare metal Zig, without the bare metal pain.")]
 struct Cli {
     #[command(subcommand)]
