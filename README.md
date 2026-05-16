@@ -1,6 +1,6 @@
 # rvkit
 
-![CI](https://github.com/GreyRav/rvkit/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/karagure/rvkit/actions/workflows/ci.yml/badge.svg)
 
 > **Rust + Zig CLI/TUI toolchain for RISC-V microcontroller development. Scaffold, build, flash, monitor.**
 
@@ -57,7 +57,7 @@ More boards coming — including custom **Open & Hack** boards.
 
 ### Pre-built binaries (recommended)
 
-Download the binary for your platform from the [latest release](https://github.com/GreyRav/rvkit/releases/latest):
+Download the binary for your platform from the [latest release](https://github.com/karagure/rvkit/releases/latest):
 
 | Platform | Binary |
 |----------|--------|
@@ -80,7 +80,7 @@ Rename the file to `rvkit.exe`, move it to a folder of your choice (e.g. `C:\Too
 ### From source (for Rust developers)
 
 ```bash
-git clone https://github.com/GreyRav/rvkit.git
+git clone https://github.com/karagure/rvkit.git
 cd rvkit
 cargo install --path cli
 ```

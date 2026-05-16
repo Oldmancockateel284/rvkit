@@ -2,11 +2,11 @@
 name = "rvkit"
 version = "0.1.0"
 edition = "2024"
-authors = ["GreyRav"]
+authors = ["karagure"]
 description = "Rust + Zig CLI/TUI toolchain for RISC-V microcontroller development"
 license = "MIT"
-repository = "https://github.com/GreyRav/rvkit"
-homepage = "https://github.com/GreyRav/rvkit"
+repository = "https://github.com/karagure/rvkit"
+homepage = "https://github.com/karagure/rvkit"
 readme = "../README.md"
 keywords = ["embedded", "risc-v", "zig", "microcontroller", "bare-metal"]
 categories = ["embedded", "command-line-utilities", "development-tools"]
