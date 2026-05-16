@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/karagure/rvkit/actions/workflows/ci.yml/badge.svg)
 
-> **Rust + Zig CLI/TUI toolchain for RISC-V microcontroller development. Scaffold, build, flash, monitor.**
+> **Bare metal Zig, without the bare metal pain.**
 
 rvkit is a CLI/TUI toolchain for Zig developers targeting RISC-V microcontrollers.  
 No more manual linker scripts, no more fighting your toolchain — just code, build, flash, monitor.
