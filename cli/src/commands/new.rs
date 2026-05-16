@@ -1,6 +1,5 @@
 use crate::boards;
 use std::fs;
-use std::path::Path;
 
 pub fn run(board_name: &str, name: &str) {
     let board = boards::get(board_name).unwrap_or_else(|| {
@@ -13,7 +12,11 @@ pub fn run(board_name: &str, name: &str) {
 
     println!("Creating project '{}' for board '{}'...", name, board.name);
 
-    let root = Path::new(name);
+    let cwd = std::env::current_dir().unwrap_or_else(|_| {
+        eprintln!("Error: cannot determine current directory.");
+        std::process::exit(1);
+    });
+    let root = cwd.join(name);
     if root.exists() {
         eprintln!("Error: directory '{}' already exists.", name);
         std::process::exit(1);
@@ -34,44 +37,12 @@ pub fn run(board_name: &str, name: &str) {
     );
     fs::write(root.join("rvkit.toml"), toml).expect("Failed to write rvkit.toml");
 
-    let main_zig = r#"const std = @import("std");
-
-    export fn _start() callconv(.c) noreturn {
-        main();
-        while (true) {}
-    }
-
-    pub fn main() void {
-    // Your bare metal code here
-    }
-    "#;
+    let main_zig = "const std = @import(\"std\");\n\nexport fn _start() callconv(.c) noreturn {\n    main();\n    while (true) {}\n}\n\nfn main() void {\n    // Your bare metal code here\n}\n";
 
     fs::write(root.join("src/main.zig"), main_zig).expect("Failed to write main.zig");
 
     let build_zig = format!(
-        r#"const std = @import("std");
-
-    pub fn build(b: *std.Build) void {{
-        const target = b.resolveTargetQuery(.{{
-            .cpu_arch = .{},
-            .os_tag = .freestanding,
-            .abi = .none,
-        }});
-
-        const exe = b.addExecutable(.{{
-            .name = "{}",
-            .root_module = b.createModule(.{{
-                .root_source_file = b.path("src/main.zig"),
-                .target = target,
-                .optimize = .ReleaseSmall,
-            }}),
-        }});
-
-        exe.setLinkerScript(b.path("linker/{}.ld"));
-
-        b.installArtifact(exe);
-    }}
-    "#,
+        "const std = @import(\"std\");\n\npub fn build(b: *std.Build) void {{\n    const target = b.resolveTargetQuery(.{{\n        .cpu_arch = .{},\n        .os_tag = .freestanding,\n        .abi = .none,\n    }});\n\n    const exe = b.addExecutable(.{{\n        .name = \"{}\",\n        .root_module = b.createModule(.{{\n            .root_source_file = b.path(\"src/main.zig\"),\n            .target = target,\n            .optimize = .ReleaseSmall,\n        }}),\n    }});\n\n    exe.setLinkerScript(b.path(\"linker/{}.ld\"));\n\n    b.installArtifact(exe);\n}}\n",
         board.cpu_arch, name, board.name
     );
     fs::write(root.join("build.zig"), build_zig).expect("Failed to write build.zig");
